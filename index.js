@@ -103,13 +103,13 @@ function mermaid(type, value, format, meta) {
 }
 
 function externalTool(command) {
-    return firstExisting([
+    return '"' + firstExisting([
         path.resolve(__dirname, "node_modules", ".bin", command),
         path.resolve(__dirname, "..", ".bin", command)],
         function() {
             console.error("External tool not found: " + command);
             process.exit(1);
-        });
+        }) + '"';
 }
 
 function mv(from, to) {
